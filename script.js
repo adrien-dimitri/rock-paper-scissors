@@ -1,6 +1,14 @@
 
 function userInput() {
-    let user = prompt("What's your choice").toLowerCase();
+    const validInput = ["rock", "paper", "scissors"]
+    let user; 
+    while (!(validInput.includes(user))) {
+        console.log('(Enter "0" to exit)');
+        user = prompt("What's your choice").toLowerCase();
+        if (user === "0"){
+            return exit();
+        }
+    }  
     return user;
 }
 
@@ -53,15 +61,15 @@ function playRound(playerSelection, computerselection) {
 }
 
 function game() {
-    let total, round = 0;
+    let total = 0;
     for (let i = 0; i < 5; i++) {
-        round = playRound(userInput(), computerPlay());
+        let round = playRound(userInput(), computerPlay());
         total += round;
     }
-    if (round > 3) {
-        console.log(`Congrats! You beat the Computer by winning ${round} times in 5 rounds`);
+    if (total > 2) {
+        console.log(`Congrats! You beat the Computer by winning ${total} times in 5 rounds`);
     } else {
-        console.log(`Better luck next time! You won only ${round} times in 5 rounds`);
+        console.log(`Better luck next time! You won only ${total} times in 5 rounds`);
     }
 }
 game()
