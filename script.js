@@ -1,4 +1,4 @@
-
+/*
 function userInput() {
     const validInput = ["rock", "paper", "scissors"]
     let user; 
@@ -11,6 +11,7 @@ function userInput() {
     }  
     return user;
 }
+*/
 
 function computerPlay() {
     let randomNumber = Math.floor((Math.random()*3)+1);
@@ -26,50 +27,41 @@ function computerPlay() {
 
 function playRound(playerSelection, computerselection) {
     if (playerSelection == computerselection) {
-        console.log(`It's a tie! You both chose ${playerSelection}`);
-        return 0
+        return `It's a tie! You both chose ${playerSelection}`;
     }
     else {
         if (playerSelection == "rock") {
             if (computerselection == "scissors") {
-                console.log("You Win! Rock beats Scissors");
-                return 1;
+                return "You Win! Rock beats Scissors";
             } else{
-                console.log("You lose! Paper beats Rock");
-                return 0;
+                return "You lose! Paper beats Rock";
             }
         }
         if (playerSelection == "paper") {
             if (computerselection == "rock") {
-                console.log("You Win! Paper beats Rock");
-                return 1;
+                return "You Win! Paper beats Rock";
             } else{
-                console.log("You lose! Scissors beats Paper");
-                return 0;
+                return "You lose! Scissors beats Paper";
             }
         }
         if (playerSelection == "scissors") {
             if (computerselection == "paper") {
-                console.log("You Win! Scissors beats Paper");
-                return 1;
+                return "You Win! Scissors beats Paper";
             } else{
-                console.log("You lose! Rock beats Scissors");
-                return 0;
+                return "You lose! Rock beats Scissors";
             }
         }
     }
 }
+const buttons = document.querySelectorAll("button");
 
-function game() {
-    let total = 0;
-    for (let i = 0; i < 5; i++) {
-        let round = playRound(userInput(), computerPlay());
-        total += round;
-    }
-    if (total > 2) {
-        console.log(`Congrats! You beat the Computer by winning ${total} times in 5 rounds`);
-    } else {
-        console.log(`Better luck next time! You won only ${total} times in 5 rounds`);
-    }
-}
-game()
+buttons.forEach((button) => {
+
+    button.addEventListener("click" , () => {
+        const container = document.querySelector(".container");
+        const result = document.createElement("div");
+        result.classList.add("result");
+        result.textContent = playRound(button.id, computerPlay());
+        container.appendChild(result);
+    })
+});
